@@ -1,0 +1,62 @@
+:root {
+    --success-border-clr-bH5cd7hD: var(--gray-9);
+    --success-background-clr-bH5cd7hD: var(--gray-9);
+    --success-text-clr-bH5cd7hD: var(--gray-1);
+    --error-border-clr-bH5cd7hD: var(--red-12);
+    --error-background-clr-bH5cd7hD: var(--red-12);
+    --error-text-clr-bH5cd7hD: var(--gray-1);
+    --button-border-clr-bH5cd7hD: transparent;
+    --button-background-clr-bH5cd7hD: transparent;
+    --button-text-clr-bH5cd7hD: var(--yellow-3);
+    --button-hover-background-clr-bH5cd7hD: rgba(0, 0, 0, 0.2);
+}
+
+.user-msg {
+    position: fixed;
+    bottom: 10%;
+    left: 15%;
+    display: flex;
+    justify-content: space-between;
+    min-width: 350px;
+    padding: 1.2em;
+    border-radius: 0.5rem;
+    font-size: 1.2em;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.user-msg p {
+    margin: 0;
+}
+
+.success {
+    border: 1px solid var(--success-border-clr-bH5cd7hD);
+    background-color: var(--success-background-clr-bH5cd7hD);
+    color: var(--success-text-clr-bH5cd7hD);
+}
+
+.error {
+    border: 1px solid var(--error-border-clr-bH5cd7hD);
+    background-color: var(--error-background-clr-bH5cd7hD);
+    color: var(--error-text-clr-bH5cd7hD);
+}
+
+.user-msg .btn {
+    border: 1px solid var(--button-border-clr-bH5cd7hD);
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.5em 1em;
+
+    font-weight: 600;
+    text-transform: uppercase;
+    word-spacing: 0.3em;
+    letter-spacing: 0.1em;
+    color: var(--button-text-clr-bH5cd7hD);
+    background: var(--button-background-clr-bH5cd7hD);
+
+    cursor: pointer;
+}
+
+.user-msg .btn:hover {
+    background-color: var(--button-hover-background-clr-bH5cd7hD);
+}
