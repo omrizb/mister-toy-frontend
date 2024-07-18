@@ -1,0 +1,24 @@
+.app-header {
+    padding-block: 1em;
+    background-color: var(--cyan-2);
+}
+
+.app-header .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-header .header-container .header-logo {
+    font-family: mystery-quest;
+    font-size: 2em;
+}
+
+.app-header .header-container .nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.app-header .header-container .nav-links > *:hover {
+    text-decoration: underline;
+}

@@ -14,9 +14,9 @@ export function App() {
     return (
         <Provider store={store}>
             <Router>
-                <div className="app main-layout">
+                <div className="app content-grid">
                     <AppHeader />
-                    <main>
+                    <main className="full content-grid">
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/toy/:toyId" element={<ToyDetails />} />
