@@ -9,8 +9,8 @@ export const SET_IS_LOADING = 'SET_IS_LOADING'
 export const SET_QUERY_PARAMS = 'SET_QUERY_PARAMS'
 
 const initialState = {
-    toys: [],
-    lastToys: [],
+    toys: {},
+    lastToys: {},
     isLoading: false,
     queryParams: toyService.getDefaultQueryParams(),
 }
@@ -25,18 +25,29 @@ export function toyReducer(state = initialState, cmd = {}) {
         case REMOVE_TOY:
             return {
                 ...state,
-                toys: state.toys.filter(toy => toy._id !== cmd.toyId),
-                lastToys: [...state.toys]
+                toys: {
+                    ...state.toys,
+                    filteredToys: [state.toys.filteredToys.filter(toy => toy._id !== cmd.toyId)]
+                },
+                lastToys: { ...state.toys }
             }
         case ADD_TOY:
             return {
                 ...state,
-                toys: [...state.toys, cmd.toy]
+                toys: {
+                    ...state.toys,
+                    filteredToys: [...state.toys.filteredToys, cmd.toy]
+                },
+                lastToys: { ...state.toys }
             }
         case UPDATE_TOY:
             return {
                 ...state,
-                toys: state.toys.map(toy => toy._id === cmd.toy._id ? cmd.toy : toy)
+                toys: {
+                    ...state.toys,
+                    filteredToys: [state.toys.filteredToys.map(toy => toy._id === cmd.toy._id ? cmd.toy : toy)]
+                },
+                lastToys: { ...state.toys }
             }
 
         case SET_IS_LOADING:
@@ -48,7 +59,7 @@ export function toyReducer(state = initialState, cmd = {}) {
         case UNDO_TOYS:
             return {
                 ...state,
-                toys: [...state.lastToys]
+                toys: { ...state.lastToys }
             }
 
         case SET_QUERY_PARAMS:
