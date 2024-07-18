@@ -1,18 +1,31 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './store/store.js'
-import { Home } from './pages/Home.jsx'
 
-// import './assets/style/main.css'
-import './App.css'
+import { AppHeader } from './cmps/AppHeader.jsx'
+import { Home } from './pages/Home.jsx'
+import { ToyDetails } from './pages/ToyDetails.jsx'
+import { ToyEdit } from './pages/ToyEdit.jsx'
+import { ToyIndex } from './pages/ToyIndex.jsx'
+
+import './assets/style/main.css'
 
 export function App() {
     return (
         <Provider store={store}>
             <Router>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                </Routes>
+                <div className="app main-layout">
+                    <AppHeader />
+                    <main>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/toy/:toyId" element={<ToyDetails />} />
+                            <Route path="/toy/edit/:toyId" element={<ToyEdit />} />
+                            <Route path="/toy/edit" element={<ToyEdit />} />
+                            <Route path="/toy" element={<ToyIndex />} />
+                        </Routes>
+                    </main>
+                </div>
             </Router>
         </Provider>
     )
