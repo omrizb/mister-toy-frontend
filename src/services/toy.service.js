@@ -1,7 +1,10 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
+import { nameMakerService } from './name-maker.service.js'
 
 const TOY_KEY = 'toyDB'
+const LABELS = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
+    'Outdoor', 'Battery Powered']
 
 _createToys(20)
 
@@ -27,7 +30,7 @@ function query(queryParams = getDefaultQueryParams()) {
             if (txt) {
                 const regExp = new RegExp(txt, 'i')
                 filteredToys = filteredToys.filter(toy => (
-                    regExp.test(toy.title)
+                    regExp.test(toy.name)
                 ))
             }
             if (labels.length > 0) {
@@ -38,7 +41,11 @@ function query(queryParams = getDefaultQueryParams()) {
                 filteredToys = filteredToys.sort((toy1, toy2) => (toy1.createdAt - toy2.createdAt) * sortDir)
             }
 
-            return filteredToys
+            return {
+                filteredToys,
+                queryParams,
+                totalNumOfToys: toys.length
+            }
         })
 }
 
@@ -67,15 +74,20 @@ function save(toy) {
 
 function getEmptyToy() {
     return {
-        title: 'New toy',
-        labels: []
+        name: 'New toy',
+        price: 0,
+        labels: [],
+        inStock: true,
     }
 }
 
 function getDefaultQueryParams() {
     return {
         txt: '',
+        minPrice: '',
+        maxPrice: '',
         labels: [],
+        inStock: 'all',
         sortBy: '',
         sortDir: 1,
     }
@@ -109,17 +121,19 @@ function _createToys(size) {
     if (!toys || !toys.length) {
         toys = []
         for (let i = 0; i < size; i++) {
-            const txt = utilService.makeLorem(3)
-            toys.push(_createToy(txt))
+            toys.push(_createToy())
         }
         utilService.saveToStorage(TOY_KEY, toys)
     }
 }
 
-function _createToy(txt) {
+function _createToy() {
     const toy = getEmptyToy()
-    toy.title = txt
     toy._id = utilService.makeId()
+    toy.name = nameMakerService.makeName()
+    toy.price = utilService.getRandomIntInclusive(10, 200)
+    toy.labels = utilService.getRandomItems(LABELS, utilService.getRandomIntInclusive(0, 3))
+    toy.inStock = Math.random() > 0.3 ? true : false
     toy.createdAt = toy.updatedAt = Date.now() - utilService.getRandomIntInclusive(0, 1000 * 60 * 60 * 24)
     return toy
 }
