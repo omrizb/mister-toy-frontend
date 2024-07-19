@@ -4,7 +4,7 @@ export function ToyList({ toys, onRemoveToy }) {
             <ul>
                 {toys.filteredToys.map(toy => (
                     <li key={toy._id}>
-                        {toy.name}
+                        {toy.name}: {toy.price}, stock: {toy.inStock ? 'yes' : 'no'}
                     </li>
                 ))}
             </ul>

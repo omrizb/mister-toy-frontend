@@ -1,0 +1,13 @@
+input {
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1px solid var(--gray-6);
+}
+
+.input-small {
+    width: 100px;
+}
+
+.input-big {
+    width: 400px;
+}

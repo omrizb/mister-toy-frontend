@@ -2,8 +2,7 @@ import { toyService } from '../../services/toy.service.js'
 import { store } from '../store.js'
 import { ADD_TOY, REMOVE_TOY, SET_TOYS, UNDO_TOYS, UPDATE_TOY } from '../reducers/toy.reducer.js'
 
-export function loadToys() {
-    const queryParams = store.getState().toyModule.queryParams
+export function loadToys(queryParams) {
     return toyService.query(queryParams)
         .then(toys => store.dispatch({ type: SET_TOYS, toys }))
 }

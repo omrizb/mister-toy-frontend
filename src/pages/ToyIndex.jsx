@@ -1,11 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { toyService } from '../services/toy.service.js'
 
 import { loadToys } from '../store/actions/toy.actions.js'
-import { SET_IS_LOADING, SET_QUERY_PARAMS } from '../store/reducers/toy.reducer.js'
+import { SET_IS_LOADING } from '../store/reducers/toy.reducer.js'
+import { ToyFilterAndSort } from '../cmps/ToyFilterAndSort.jsx'
 import { ToyList } from '../cmps/ToyList.jsx'
 
 export function ToyIndex() {
@@ -15,16 +16,12 @@ export function ToyIndex() {
     const dispatch = useDispatch()
     const toys = useSelector(state => state.toyModule.toys)
     const isLoading = useSelector(state => state.toyModule.isLoading)
-    const queryParams = useSelector(state => state.toyModule.queryParams)
-
-    useEffect(() => {
-        dispatch({ type: SET_QUERY_PARAMS, queryParams: toyService.getQueryParams(searchParams) })
-    }, [])
+    const [queryParams, setQueryParams] = useState(toyService.getQueryParams(searchParams))
 
     useEffect(() => {
         dispatch({ type: SET_IS_LOADING, isLoading: true })
         setSearchParams(queryParams)
-        loadToys()
+        loadToys(queryParams)
             .catch(err => {
                 console.error('Error:', err)
                 showErrorMsg('Cannot load toys')
@@ -36,14 +33,18 @@ export function ToyIndex() {
         // TODO
     }
 
+    function onSetQueryParams(queryParams) {
+        setQueryParams(queryParams)
+    }
 
     return (
-        <div className="todo-index">
+        <>
+            <ToyFilterAndSort queryParams={queryParams} onSetQueryParams={onSetQueryParams} />
             <h2>Toys List</h2>
             {isLoading
                 ? <div>Loading...</div>
                 : <ToyList toys={toys} onRemoveToy={onRemoveToy} />
             }
-        </div>
+        </>
     )
 }

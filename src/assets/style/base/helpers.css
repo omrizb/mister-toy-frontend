@@ -1,63 +1,92 @@
+/* Box format */
+
+.m-top-1 {
+    margin-block-start: 1em;
+}
+
+.p-block-1 {
+    padding-block: 1em;
+}
+
 /* Simple and useful CSS Debugging Technique */
 
 .debug * {
-	outline: 1px solid gold;
+    outline: 1px solid gold;
 }
 
 /* flex helpers */
 
 .flex {
-	display: flex;
+    display: flex;
 }
 
 .flex.flex-column {
-	flex-direction: column;
+    flex-direction: column;
 }
 
 .flex.justify-center {
-	justify-content: center;
+    justify-content: center;
 }
 
 .flex.justify-between {
-	justify-content: space-between;
+    justify-content: space-between;
 }
 
 .flex.align-center {
-	align-items: center;
+    align-items: center;
 }
 
+.flex.g-1 {
+    gap: 5px;
+}
+
+.flex.g-2 {
+    gap: 10px;
+}
+
+.flex.g-3 {
+    gap: 15px;
+}
+
+.flex.g-4 {
+    gap: 20px;
+}
+
+.flex.g-5 {
+    gap: 30px;
+}
 /* text helpers */
 
 .colored-text {
-	color: var(--clr1);
+    color: var(--clr1);
 }
 
 /* list helpers */
 
 .clean-list {
-	padding: 0;
-	margin: 0;
-	list-style-type: none;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
 }
 
-/* font awsome */
+/* font awesome */
 
 .fa {
-	font-family: fa;
+    font-family: fa;
 }
 
 .fa.fa-facebook::before {
-	content: '\f39e';
+    content: "\f39e";
 }
 
 .fa.fa-twitter::before {
-	content: '\f099';
+    content: "\f099";
 }
 
 .fa.fa-dribbble::before {
-	content: '\f17d';
+    content: "\f17d";
 }
 
 .fa.fa-behance::before {
-	content: '\f1b4';
+    content: "\f1b4";
 }

@@ -16,15 +16,13 @@ export function App() {
             <Router>
                 <div className="app content-grid">
                     <AppHeader />
-                    <main className="full content-grid">
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/toy/:toyId" element={<ToyDetails />} />
-                            <Route path="/toy/edit/:toyId" element={<ToyEdit />} />
-                            <Route path="/toy/edit" element={<ToyEdit />} />
-                            <Route path="/toy" element={<ToyIndex />} />
-                        </Routes>
-                    </main>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/toy/:toyId" element={<ToyDetails />} />
+                        <Route path="/toy/edit/:toyId" element={<ToyEdit />} />
+                        <Route path="/toy/edit" element={<ToyEdit />} />
+                        <Route path="/toy" element={<ToyIndex />} />
+                    </Routes>
                 </div>
             </Router>
         </Provider>

@@ -25,13 +25,29 @@ function query(queryParams = getDefaultQueryParams()) {
     return storageService.query(TOY_KEY)
         .then(toys => {
             let filteredToys = toys
-            const { txt, labels, sortBy, sortDir } = queryParams
+            const { txt, minPrice, maxPrice, inStock, labels, sortBy, sortDir } = queryParams
 
             if (txt) {
                 const regExp = new RegExp(txt, 'i')
                 filteredToys = filteredToys.filter(toy => (
                     regExp.test(toy.name)
                 ))
+            }
+            if (minPrice) {
+                filteredToys = filteredToys.filter(toy => toy.price >= minPrice)
+            }
+            if (maxPrice) {
+                filteredToys = filteredToys.filter(toy => toy.price <= maxPrice)
+            }
+            switch (inStock) {
+                case 'all':
+                    break
+                case 'true':
+                    filteredToys = filteredToys.filter(toy => toy.inStock)
+                    break
+                case 'false':
+                    filteredToys = filteredToys.filter(toy => !toy.inStock)
+                    break
             }
             if (labels.length > 0) {
                 filteredToys = filteredToys.filter(toy => labels.every(label => toy.labels.includes(label)))

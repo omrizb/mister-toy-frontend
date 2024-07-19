@@ -6,12 +6,11 @@ export const ADD_TOY = 'ADD_TOY'
 export const UPDATE_TOY = 'UPDATE_TOY'
 export const UNDO_TOYS = 'UNDO_TOYS'
 export const SET_IS_LOADING = 'SET_IS_LOADING'
-export const SET_QUERY_PARAMS = 'SET_QUERY_PARAMS'
 
 const initialState = {
     toys: {},
     lastToys: {},
-    isLoading: false,
+    isLoading: true,
     queryParams: toyService.getDefaultQueryParams(),
 }
 
@@ -60,12 +59,6 @@ export function toyReducer(state = initialState, cmd = {}) {
             return {
                 ...state,
                 toys: { ...state.lastToys }
-            }
-
-        case SET_QUERY_PARAMS:
-            return {
-                ...state,
-                queryParams: { ...cmd.queryParams }
             }
 
         default:

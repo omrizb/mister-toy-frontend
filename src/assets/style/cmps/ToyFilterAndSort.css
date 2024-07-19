@@ -1,0 +1,8 @@
+.toy-filter-and-sort {
+    color: var(--gray-0);
+    background-color: var(--pink-8);
+}
+
+.toy-filter-and-sort .filter > *:last-child {
+    margin-left: auto;
+}
