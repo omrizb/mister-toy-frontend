@@ -8,6 +8,7 @@ import { loadToys } from '../store/actions/toy.actions.js'
 import { SET_IS_LOADING } from '../store/reducers/toy.reducer.js'
 import { ToyFilterAndSort } from '../cmps/ToyFilterAndSort.jsx'
 import { ToyList } from '../cmps/ToyList.jsx'
+import { ColoredSentence } from '../cmps/ColoredSentence.jsx'
 
 export function ToyIndex() {
 
@@ -40,7 +41,7 @@ export function ToyIndex() {
     return (
         <>
             <ToyFilterAndSort queryParams={queryParams} onSetQueryParams={onSetQueryParams} />
-            <h2>Toys List</h2>
+            <h2 className="m-top-1"><ColoredSentence>What toy would like to play with today?</ColoredSentence></h2>
             {isLoading
                 ? <div>Loading...</div>
                 : <ToyList toys={toys} onRemoveToy={onRemoveToy} />

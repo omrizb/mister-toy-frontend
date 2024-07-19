@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const utilService = {
     loadFromStorage,
     saveToStorage,
@@ -6,6 +8,7 @@ export const utilService = {
     getRandomIntInclusive,
     getRandomItems,
     getRandomColor,
+    generateRandomImageUrl,
     getDayName,
     getMonthName,
     animateCSS,
@@ -64,6 +67,24 @@ function getRandomColor() {
         color += chars[Math.floor(Math.random() * chars.length)]
     }
     return color
+}
+
+function generateRandomImageUrl(props = {}) {
+    const BASE_URL = 'https://picsum.photos'
+    const { width, height, minWidth, maxWidth, minHeight, maxHeight } = props
+
+    let url = ''
+    if (width && height) {
+        url = `${BASE_URL}/${width}/${height}`
+    } else if (minWidth && maxWidth && minHeight && maxHeight) {
+        const randomWidth = getRandomIntInclusive(minWidth, maxWidth)
+        const randomHeight = getRandomIntInclusive(minHeight, maxHeight)
+        url = `${BASE_URL}/${randomWidth}/${randomHeight}`
+    } else {
+        url = `${BASE_URL}/480/360`
+    }
+
+    return url
 }
 
 

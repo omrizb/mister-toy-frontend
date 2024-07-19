@@ -1,0 +1,19 @@
+.toy-list ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-inline: auto;
+}
+
+.toy-list ul > * {
+    padding: 1em;
+    border-radius: 5px;
+    border: 1px solid var(--gray-8);
+    background-color: var(--yellow-0);
+}
+
+.toy-list .toy-actions {
+    display: flex;
+    gap: 10px;
+    padding-block: 1em;
+}
