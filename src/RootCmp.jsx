@@ -2,6 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './store/store.js'
 
+import { About } from './pages/About.jsx'
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { Home } from './pages/Home.jsx'
 import { ToyDetails } from './pages/ToyDetails.jsx'
@@ -22,6 +23,7 @@ export function App() {
                         <Route path="/toy/edit/:toyId" element={<ToyEdit />} />
                         <Route path="/toy/edit" element={<ToyEdit />} />
                         <Route path="/toy" element={<ToyIndex />} />
+                        <Route path="/about" element={<About />} />
                     </Routes>
                 </div>
             </Router>

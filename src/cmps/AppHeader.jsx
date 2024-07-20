@@ -2,14 +2,17 @@ import { NavLink } from 'react-router-dom'
 
 export function AppHeader() {
     return (
-        <div className="app-header full content-grid p-block-1">
-            <div className="header-container">
+        <>
+            <div className="header-upper full content-grid p-block-2">
                 <div className="header-logo">Mister Toys</div>
-                <nav className="nav-links">
+            </div>
+            <nav className="header-nav-links full content-grid p-block-1">
+                <div className="links-container">
                     <NavLink to="/" >Home</NavLink>
                     <NavLink to="/toy" >Toys</NavLink>
-                </nav>
-            </div>
-        </div>
+                    <NavLink to="/about" >About</NavLink>
+                </div>
+            </nav>
+        </>
     )
 }

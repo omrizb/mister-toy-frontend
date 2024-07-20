@@ -1,23 +1,21 @@
-.app-header {
-    background-color: var(--cyan-2);
+.header-upper {
+    background-color: var(--cyan-3);
 }
 
-.app-header .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.app-header .header-container .header-logo {
+.header-upper .header-logo {
     font-family: mystery-quest;
     font-size: 2em;
 }
 
-.app-header .header-container .nav-links {
+.header-nav-links {
+    background-color: var(--cyan-1);
+}
+
+.header-nav-links .links-container {
     display: flex;
     gap: 15px;
 }
 
-.app-header .header-container .nav-links > *:hover {
+.header-nav-links .links-container > *:hover {
     text-decoration: underline;
 }
