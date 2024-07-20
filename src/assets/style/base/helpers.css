@@ -5,6 +5,10 @@
 }
 
 .p-block-1 {
+    padding-block: 0.5em;
+}
+
+.p-block-2 {
     padding-block: 1em;
 }
 

@@ -13,6 +13,7 @@
 
 /* Components */
 @import "cmps/AppHeader.css";
+@import "cmps/Loader.css";
 @import "cmps/Modal.css";
 @import "cmps/ToyFilterAndSort.css";
 @import "cmps/ToyList.css";
