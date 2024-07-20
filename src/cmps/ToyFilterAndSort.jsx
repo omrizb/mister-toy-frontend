@@ -34,7 +34,7 @@ export function ToyFilterAndSort({ queryParams, onSetQueryParams }) {
 
     const { txt, minPrice, maxPrice, inStock } = queryParamsToEdit
     return (
-        <div className="toy-filter-and-sort full content-grid p-block-1">
+        <div className="toy-filter-and-sort full content-grid p-block-2">
             <div className="filter flex align-center g-3">
                 <input
                     className="input-big"
