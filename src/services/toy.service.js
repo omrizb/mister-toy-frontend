@@ -3,8 +3,7 @@ import { storageService } from './async-storage.service.js'
 import { nameMakerService } from './name-maker.service.js'
 
 const TOY_KEY = 'toyDB'
-const LABELS = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
-    'Outdoor', 'Battery Powered']
+const LABELS = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 'Outdoor', 'Battery Powered']
 
 _createToys(20)
 
@@ -16,6 +15,7 @@ export const toyService = {
     getEmptyToy,
     getDefaultQueryParams,
     getQueryParams,
+    getLabels,
 }
 
 // For Debug (easy access from console):
@@ -130,6 +130,10 @@ function getQueryParams(searchParams) {
     }
 
     return queryParams
+}
+
+function getLabels() {
+    return [...LABELS]
 }
 
 function _createToys(size) {
