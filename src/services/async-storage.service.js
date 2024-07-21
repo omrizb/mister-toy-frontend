@@ -23,7 +23,6 @@ function get(entityType, entityId) {
 function post(entityType, newEntity) {
     newEntity = { ...newEntity }
     newEntity._id = _makeId()
-    newEntity.createdAt = newEntity.updatedAt = Date.now()
     return query(entityType).then(entities => {
         entities.push(newEntity)
         _save(entityType, entities)
@@ -32,7 +31,6 @@ function post(entityType, newEntity) {
 }
 
 function put(entityType, updatedEntity) {
-    updatedEntity.updatedAt = Date.now()
     return query(entityType).then(entities => {
         const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
         if (idx < 0) throw new Error(`Update failed, cannot find entity with id: ${entityId} in: ${entityType}`)
