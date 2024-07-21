@@ -18,8 +18,11 @@ export function removeToy(toyId) {
 
 export function saveToy(toy) {
     const type = toy._id ? UPDATE_TOY : ADD_TOY
-    store.dispatch({ type, toy })
     return toyService.save(toy)
+        .then(savedToy => {
+            store.dispatch({ type, toy: savedToy })
+            return savedToy
+        })
         .catch(err => {
             store.dispatch({ type: UNDO_TOYS })
             throw err

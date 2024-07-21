@@ -26,7 +26,7 @@ export function toyReducer(state = initialState, cmd = {}) {
                 ...state,
                 toys: {
                     ...state.toys,
-                    filteredToys: [state.toys.filteredToys.filter(toy => toy._id !== cmd.toyId)]
+                    filteredToys: [...state.toys.filteredToys.filter(toy => toy._id !== cmd.toyId)]
                 },
                 lastToys: { ...state.toys }
             }
@@ -44,7 +44,7 @@ export function toyReducer(state = initialState, cmd = {}) {
                 ...state,
                 toys: {
                     ...state.toys,
-                    filteredToys: [state.toys.filteredToys.map(toy => toy._id === cmd.toy._id ? cmd.toy : toy)]
+                    filteredToys: [...state.toys.filteredToys.map(toy => toy._id === cmd.toy._id ? cmd.toy : toy)]
                 },
                 lastToys: { ...state.toys }
             }
