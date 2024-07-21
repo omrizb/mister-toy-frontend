@@ -59,6 +59,12 @@
 .flex.g-5 {
     gap: 30px;
 }
+
+.no-stretch {
+    place-self: start;
+    align-self: flex-start;
+}
+
 /* text helpers */
 
 .colored-text {
