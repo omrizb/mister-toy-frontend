@@ -8,6 +8,7 @@ import { Home } from './pages/Home.jsx'
 import { ToyDetails } from './pages/ToyDetails.jsx'
 import { ToyEdit } from './pages/ToyEdit.jsx'
 import { ToyIndex } from './pages/ToyIndex.jsx'
+import { UserMsg } from './cmps/UserMsg.jsx'
 
 import './assets/style/main.css'
 
@@ -27,6 +28,7 @@ export function App() {
                     </Routes>
                 </div>
             </Router>
+            <UserMsg />
         </Provider>
     )
 }

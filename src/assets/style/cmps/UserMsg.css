@@ -14,7 +14,7 @@
 .user-msg {
     position: fixed;
     bottom: 10%;
-    left: 15%;
+    right: 15%;
     display: flex;
     justify-content: space-between;
     min-width: 350px;
