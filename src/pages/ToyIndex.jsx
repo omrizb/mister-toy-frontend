@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { toyService } from '../services/toy.service.js'
@@ -31,8 +31,8 @@ export function ToyIndex() {
             .finally(() => dispatch({ type: SET_IS_LOADING, isLoading: false }))
     }, [queryParams])
 
-    function onRemoveToy() {
-        // TODO
+    function onAddToy() {
+
     }
 
     function onSetQueryParams(queryParams) {
@@ -43,9 +43,10 @@ export function ToyIndex() {
         <>
             <ToyFilterAndSort queryParams={queryParams} onSetQueryParams={onSetQueryParams} />
             <h2 className="m-top-1"><ColoredSentence>What toy would like to play with today?</ColoredSentence></h2>
+            <Link to="/toy/edit" className="btn no-stretch m-top-1">Add Toy</Link>
             {isLoading
                 ? <Loader />
-                : <ToyList toys={toys} onRemoveToy={onRemoveToy} />
+                : <ToyList toys={toys} />
             }
         </>
     )
