@@ -1,11 +1,7 @@
-import { utilService } from './util.service.js'
-import { storageService } from './async-storage.service.js'
-import { nameMakerService } from './name-maker.service.js'
+import { httpService } from './http.service.js'
 
-const TOY_KEY = 'toyDB'
+const BASE_URL = 'toy/'
 const LABELS = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 'Outdoor', 'Battery Powered']
-
-_createToys(20)
 
 export const toyService = {
     query,
@@ -22,75 +18,26 @@ export const toyService = {
 // window.toyService = toyService
 
 function query(queryParams = getDefaultQueryParams()) {
-    return storageService.query(TOY_KEY)
-        .then(toys => {
-            let filteredToys = toys
-            const { txt, minPrice, maxPrice, inStock, labels, sortBy, sortDir } = queryParams
-
-            if (txt) {
-                const regExp = new RegExp(txt, 'i')
-                filteredToys = filteredToys.filter(toy => (
-                    regExp.test(toy.name)
-                ))
-            }
-            if (minPrice) {
-                filteredToys = filteredToys.filter(toy => toy.price >= minPrice)
-            }
-            if (maxPrice) {
-                filteredToys = filteredToys.filter(toy => toy.price <= maxPrice)
-            }
-            switch (inStock) {
-                case 'all':
-                    break
-                case 'true':
-                    filteredToys = filteredToys.filter(toy => toy.inStock)
-                    break
-                case 'false':
-                    filteredToys = filteredToys.filter(toy => !toy.inStock)
-                    break
-            }
-            if (labels.length > 0) {
-                filteredToys = filteredToys.filter(toy => labels.every(label => toy.labels.includes(label)))
-            }
-
-            if (sortBy === 'createdAt') {
-                filteredToys = filteredToys.sort((toy1, toy2) => (toy1.createdAt - toy2.createdAt) * sortDir)
-            }
-
-            return {
-                filteredToys,
-                queryParams,
-                totalNumOfToys: toys.length
-            }
-        })
+    return httpService.get(BASE_URL, queryParams)
 }
 
 function get(toyId) {
-    return storageService.get(TOY_KEY, toyId)
-        .then(toy => {
-            toy = _setNextPrevToyId(toy)
-            return toy
-        })
+    return httpService.get(BASE_URL + toyId)
 }
 
 function remove(toyId) {
-    return storageService.remove(TOY_KEY, toyId)
+    return httpService.delete(BASE_URL + toyId)
 }
 
 function save(toy) {
-    if (toy._id) {
-        // TOY - updatable fields
-        toy.updatedAt = Date.now()
-        return storageService.put(TOY_KEY, toy)
-    } else {
-        toy.createdAt = toy.updatedAt = Date.now()
-        return storageService.post(TOY_KEY, toy)
-    }
+    const method = toy._id ? 'put' : 'post'
+    return httpService[method](BASE_URL + (toy._id ? toy._id : ''), toy)
 }
 
 function getEmptyToy() {
     return {
         name: 'New toy',
+        description: '',
         price: 0,
         labels: [],
         inStock: true,
@@ -134,37 +81,4 @@ function getQueryParams(searchParams) {
 
 function getLabels() {
     return [...LABELS]
-}
-
-function _createToys(size) {
-    let toys = utilService.loadFromStorage(TOY_KEY)
-    if (!toys || !toys.length) {
-        toys = []
-        for (let i = 0; i < size; i++) {
-            toys.push(_createToy())
-        }
-        utilService.saveToStorage(TOY_KEY, toys)
-    }
-}
-
-function _createToy() {
-    const toy = getEmptyToy()
-    toy._id = utilService.makeId()
-    toy.name = nameMakerService.makeName()
-    toy.price = utilService.getRandomIntInclusive(10, 200)
-    toy.labels = utilService.getRandomItems(LABELS, utilService.getRandomIntInclusive(0, 3))
-    toy.inStock = Math.random() > 0.3 ? true : false
-    toy.createdAt = toy.updatedAt = Date.now() - utilService.getRandomIntInclusive(0, 1000 * 60 * 60 * 24)
-    return toy
-}
-
-function _setNextPrevToyId(toy) {
-    return storageService.query(TOY_KEY).then((toys) => {
-        const toyIdx = toys.findIndex((currToy) => currToy._id === toy._id)
-        const nextToy = toys[toyIdx + 1] ? toys[toyIdx + 1] : toys[0]
-        const prevToy = toys[toyIdx - 1] ? toys[toyIdx - 1] : toys[toys.length - 1]
-        toy.nextToyId = nextToy._id
-        toy.prevToyId = prevToy._id
-        return toy
-    })
 }
