@@ -61,44 +61,38 @@ export function ToyEdit() {
         }))
     }
 
-    function Form() {
-        return (
-            <form onSubmit={onSaveToy} >
-                <label>
-                    Name:
-                    <input onChange={handleChange} value={toyToEdit.name} type="text" name="name" />
-                </label>
-                <label>
-                    Price:
-                    <input onChange={handleChange} value={toyToEdit.price} type="number" name="price" />
-                </label>
-                <label>
-                    In stock:
-                    <input onChange={handleChange} checked={toyToEdit.inStock} type="checkbox" name="inStock" />
-                </label>
-                <ul>
-                    {labels.current.map(label => (
-                        <li key={label}>
-                            <input
-                                onChange={handleLabelChange}
-                                checked={toyToEdit.labels.includes(label)}
-                                type="checkbox"
-                                name={label}
-                            />
-                            {label}
-                        </li>
-                    ))}
-                </ul>
-                <button className="btn">Save</button>
-            </form>
-        )
-    }
-
     return (
         <div className="toy-edit">
             {isLoading
                 ? <Loader />
-                : <Form />
+                : <form onSubmit={onSaveToy} >
+                    <label>
+                        Name:
+                        <input onChange={handleChange} value={toyToEdit.name} type="text" name="name" />
+                    </label>
+                    <label>
+                        Price:
+                        <input onChange={handleChange} value={toyToEdit.price} type="number" name="price" />
+                    </label>
+                    <label>
+                        In stock:
+                        <input onChange={handleChange} checked={toyToEdit.inStock} type="checkbox" name="inStock" />
+                    </label>
+                    <ul>
+                        {labels.current.map(label => (
+                            <li key={label}>
+                                <input
+                                    onChange={handleLabelChange}
+                                    checked={toyToEdit.labels.includes(label)}
+                                    type="checkbox"
+                                    name={label}
+                                />
+                                {label}
+                            </li>
+                        ))}
+                    </ul>
+                    <button className="btn">Save</button>
+                </form>
             }
         </div>
     )
