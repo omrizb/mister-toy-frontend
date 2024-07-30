@@ -31,10 +31,6 @@ export function ToyIndex() {
             .finally(() => dispatch({ type: SET_IS_LOADING, isLoading: false }))
     }, [queryParams])
 
-    function onAddToy() {
-
-    }
-
     function onSetQueryParams(queryParams) {
         setQueryParams(queryParams)
     }
